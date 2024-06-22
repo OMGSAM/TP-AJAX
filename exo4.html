@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Récupérer les utilisateurs avec XMLHttpRequest</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelector("button").addEventListener("click", function(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "users.json", true);
+                xhr.onload = function(){
+                    if (xhr.status == 200) {
+                        var users = JSON.parse(xhr.responseText);
+                        var output = '';
+                        for (var i in users) {
+                            output += '<div>' + users[i].name + ' (' + users[i].email + ')</div>';
+                        }
+                        document.getElementById("users").innerHTML = output;
+                    }
+                };
+                xhr.send();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Récupérer les utilisateurs avec XMLHttpRequest</h1>
+    <button>Load Users</button>
+    <div id="users"></div>
+</body>
+</html>
+
+////  jquery-ajax///
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Récupérer les utilisateurs avec $.ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.ajax({
+                    url: "users.json",
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        var output = '';
+                        $.each(data, function(index, user){
+                            output += '<div>' + user.name + ' (' + user.email + ')</div>';
+                        });
+                        $("#users").html(output);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Récupérer les utilisateurs avec $.ajax</h1>
+    <button>Load Users</button>
+    <div id="users"></div>
+</body>
+</html>
+
+
+////GET-JSON
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Récupérer les utilisateurs avec $.getJSON</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.getJSON("users.json", function(data){
+                    var output = '';
+                    $.each(data, function(index, user){
+                        output += '<div>' + user.name + ' (' + user.email + ')</div>';
+                    });
+                    $("#users").html(output);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Récupérer les utilisateurs avec $.getJSON</h1>
+    <button>Load Users</button>
+    <div id="users"></div>
+</body>
+</html>
+
+
+///USER-JSON
+
+
+[
+    {"id": 1, "name": "John Doe", "email": "john@example.com"},
+    {"id": 2, "name": "Jane Smith", "email": "jane@example.com"},
+    {"id": 3, "name": "Alice Johnson", "email": "alice@example.com"}
+]
