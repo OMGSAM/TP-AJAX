@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chargement Dynamique</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#loadButton").click(function(){
+                $.ajax({
+                    url: "content.html",
+                    success: function(result){
+                        $("#contentDiv").html(result);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="loadButton">Charger le contenu</button>
+    <div id="contentDiv"></div>
+</body>
+</html>
